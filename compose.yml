@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:latest
+    restart: unless-stopped
+    ports:
+      - ${WBS_DATABASE_PORT:-5432}:5432
+    environment:
+      POSTGRES_DB: ${WBS_DATABASE_NAME}
+      POSTGRES_USER: ${WBS_DATABASE_USER}
+      POSTGRES_PASSWORD: ${WBS_DATABASE_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+    driver: local
